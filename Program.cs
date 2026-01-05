@@ -1,4 +1,3 @@
-
 using KonyvtarNyilvantartas.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +16,7 @@ namespace KonyvtarNyilvantartas
 
             builder.Services.AddControllers();
 
-            builder.Services.AddAutoMapper(typeof(Program).Assembly);
+            builder.Services.AddAutoMapper(cfg => { }, typeof(Program).Assembly);
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
