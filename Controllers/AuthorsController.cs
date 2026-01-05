@@ -28,7 +28,7 @@ namespace KonyvtarNyilvantartas.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AuthorReadDTO>>> GetAuthors()
         {
-            var authors = await _context.Authors.ToListAsync();
+            var authors = await _context.Authors.Include(x => x.Books).ToListAsync();
             var authorsDto = _mapper.Map<List<AuthorReadDTO>>(authors);
 
             return Ok(authorsDto);
@@ -37,7 +37,7 @@ namespace KonyvtarNyilvantartas.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<AuthorReadDTO>> GetAuthor(int id)
         {
-            var author = await _context.Authors.FindAsync(id);
+            var author = await _context.Authors.Include(x => x.Books).FirstOrDefaultAsync(x => x.Id == id);
 
             if (author == null) return NotFound();
 
